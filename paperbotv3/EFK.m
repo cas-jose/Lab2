@@ -51,7 +51,7 @@ F = [ 1 0 frontRange(1)*sin(angleMeas(1));  %Initializing Jacobian
       0 1 -rightRange*cos(pi/2-angleMeas(1));
       0 0 1];
 Q = [1;1;1]
-P = 
+Pk = F*P*transpose(F) + Q;
 
 
 for i = 2:100
@@ -63,6 +63,7 @@ Gk = Pk*transpose(Hk)*inv(Hk*Pk*transpose(Hk)+ R);
 
 %Update:
 
-  
+  xhat = xhat = + Gk(zk - hk);
+  Pk = (eye - Gk*Hk)*Pk;
   
 end
